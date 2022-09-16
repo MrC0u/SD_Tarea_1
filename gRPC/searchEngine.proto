@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+// package search;
+
+service searchEngine{
+    rpc GetServerResponse(Message) returns (Datasets){}
+}
+
+message Message{
+    string message = 1;
+}
+
+message Datasets{
+    repeated Dataset dataset = 1;
+}
+
+message Dataset{
+
+    int32 id = 1;
+    string title = 2;
+    string description = 3;
+    string url = 4;
+}

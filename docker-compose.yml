@@ -1,9 +1,30 @@
 version: '3.7'
 services:
 
-  client:
-    container_name: client-http
-    build: ./Node-Server
+  server:
+    container_name: server-http
+    build: ./Server
+    depends_on:
+    - grpc_server
     ports:
       - "3000:3000"
+    
+  grpc_server:
+    container_name: server-grpc
+    build: ./gRPC
+    depends_on:
+      - postgres
+    ports:
+      - "8030:8030"
 
+  postgres:
+    image: docker.io/bitnami/postgresql:14
+    volumes:
+      - ./Database/db/:/docker-entrypoint-initdb.d/test-init.sql
+    environment:
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=postgres
+      - ALLOW_EMPTY_PASSWORD=yes
+      - POSTGRESQL_DATABASE=dataset
+    ports:
+      - "5432:5432"
