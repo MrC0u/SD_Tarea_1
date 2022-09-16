@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-EXPOSE 8030
+EXPOSE 8000
 
 RUN npm i
 

@@ -6,6 +6,9 @@ services:
     build: ./Server
     depends_on:
     - grpc_server
+    - redis
+    - redis2
+    - redis3
     ports:
       - "3000:3000"
     
@@ -15,7 +18,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - "8030:8030"
+      - "8000:8000"
 
   postgres:
     image: docker.io/bitnami/postgresql:14
@@ -28,3 +31,40 @@ services:
       - POSTGRESQL_DATABASE=dataset
     ports:
       - "5432:5432"
+
+  redis:
+    container_name: redis_1_master
+    image: bitnami/redis:7.0.4
+    restart: always
+    ports:
+      - "7000:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_REPLICATION_MODE=master
+    command: /opt/bitnami/scripts/redis/run.sh --maxmemory 2mb --maxmemory-policy allkeys-lfu
+  
+  redis2:
+    image: bitnami/redis:7.0.4
+    container_name: redis_2
+    ports:
+      - "7001:6379"
+    environment:
+      - REDIS_REPLICATION_MODE=slave
+      - REDIS_MASTER_HOST=redis
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_MASTER_PORT_NUMBER=6379
+    restart: always
+
+  redis3:
+    image: bitnami/redis:7.0.4
+    container_name: redis_3
+    ports:
+      - "7002:6379"
+    environment:
+      - REDIS_REPLICATION_MODE=slave
+      - REDIS_MASTER_HOST=redis
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_MASTER_PORT_NUMBER=6379
+    restart: always
+
+  
