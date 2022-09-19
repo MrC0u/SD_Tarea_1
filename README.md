@@ -20,5 +20,3 @@ cd ..
 
 python3 myversion.py
 
-rm -rf logs
-
