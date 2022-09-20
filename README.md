@@ -7,7 +7,7 @@ http://www.cim.mcgill.ca/~dudek/206/Logs/AOL-user-ct-collection/
 
 
 ## Dataset Download Commands:
-
+```bash
 cd Crawler/files/
 
 wget http://www.cim.mcgill.ca/~dudek/206/Logs/AOL-user-ct-collection/user-ct-test-collection-09.txt.gz
@@ -21,21 +21,22 @@ mv user-ct-test-collection-09.txt file.txt
 cd ..
 
 python3 crawler.py <input name>.txt test-init.sql <lines>
-
+```
 
  
 ## Docker Compose Run:
-  
+```bash
 docker docker-compose up --build
-  
+```
 En caso de querer remover memoria cache, e ingresar nueva base de datos:
-  
+```bash  
 sudo docker system prune -a
-  
+``` 
 Para ingresar a redis usar:
-  
+```bash
 sudo docker exec -it <id/nombre> sh
-  
+```
+ 
 ## Comandos Redis:
 
 ```bash
