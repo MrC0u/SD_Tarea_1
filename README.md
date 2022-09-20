@@ -44,3 +44,5 @@ redis-cli monitor
   
 redis-cli --stat
 ```
+# Video
+[![Video](https://img.youtube.com/vi/8L00K7jyPCs/0.jpg)](https://www.youtube.com/watch?v=8L00K7jyPCs)
