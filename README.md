@@ -22,3 +22,24 @@ cd ..
 
 python3 crawler.py <input name>.txt test-init.sql <lines>
 
+
+ 
+## Docker Compose Run:
+  
+docker docker-compose up --build
+  
+En caso de querer remover memoria cache, e ingresar nueva base de datos:
+  
+sudo docker system prune -a
+  
+Para ingresar a redis usar:
+  
+sudo docker exec -it <id/nombre> sh
+  
+## Comandos Redis:
+
+```bash
+redis-cli monitor
+  
+redis-cli --stat
+```
